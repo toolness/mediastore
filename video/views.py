@@ -8,6 +8,7 @@ from .models import Video
 def detail(request, slug):
     video = get_object_or_404(Video, slug=slug)
     return render(request, 'video/detail.html', {
+        'DEBUG': settings.DEBUG,
         'video': video
     })
 

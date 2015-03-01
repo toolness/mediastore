@@ -1,23 +1,62 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>{{ video.name }}</title>
-
-<h1>{{ video.name }}</h1>
-
-<p>
-  <video src="{{ video.source.url }}" controls></video>
-</p>
-
-{{ video.description }}
-
-<ul>
-  <li>
-    <a href="{{ video.source.url }}" download="{{ video.slug }}.mp4">Download</a>
-  </li>
-
-{% if user.is_superuser %}
-  <li>
-    <a href="{% url 'admin:video_video_change' video.id %}">Edit</a>
-  </li>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% load static from staticfiles %}
+{% if DEBUG %}
+<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.css' %}">
+{% else %}
+<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
 {% endif %}
-</ul>
+<style>
+body {
+  margin-bottom: 1em;
+}
+
+.main-video-holder {
+  text-align: center;
+  margin: 1em 0;
+}
+
+.main-video {
+  max-width: 100%;
+  max-height: 75vh;
+}
+
+.main-video-description {
+  margin: 1em 0;
+}
+
+@media (max-width: 480px) {
+  .hidden-teensy {
+    display: none;
+  }
+}
+</style>
+<title>{{ video.name }}</title>
+<div class="container">
+  <h1>{{ video.name }}</h1>
+
+  <div class="main-video-holder">
+    <video class="main-video" src="{{ video.source.url }}" controls></video>
+  </div>
+
+  <div class="main-video-description">
+    {{ video.description }}
+  </div>
+
+  <div class="btn-group btn-group-justified" role="group">
+    <a href="{{ video.source.url }}" download="{{ video.slug }}.mp4"
+       class="btn btn-default">
+      <span class="glyphicon glyphicon-save"></span>
+      <span class="hidden-teensy">Download</span>
+    </a>
+
+    {% if user.is_superuser %}
+    <a href="{% url 'admin:video_video_change' video.id %}"
+       class="btn btn-default">
+      <span class="glyphicon glyphicon-pencil"></span>
+      <span class="hidden-teensy">Edit</span>
+    </a>
+    {% endif %}
+  </div>
+</div>
