@@ -27,3 +27,6 @@ class Video(models.Model):
 
     def get_absolute_url(self):
         return reverse('video_detail', args=(self.slug,))
+
+    def __unicode__(self):
+        return self.name
