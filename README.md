@@ -40,6 +40,8 @@ Also, `DEBUG` is enabled.
   value is the name of another (all-caps) environment variable, e.g.
   `HEROKU_POSTGRESQL_AMBER_URL`, that variable's value will be used
   as the database URL.
+* `ALLOWED_HOSTS` is a comma-separated list of host/domain names
+  the site can serve. This list should not include any spaces.
 * `SECURE_PROXY_SSL_HEADER` is an optional HTTP request header field name
   and value indicating that the request is actually secure. For example,
   Heroku deployments should set this to `X-Forwarded-Proto: https`.
