@@ -108,6 +108,8 @@ if DEBUG:
     MEDIA_ROOT = path('uploads')
     MEDIA_URL = '/debug/uploads/'
 
+AWS_QUERYSTRING_AUTH = False
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
