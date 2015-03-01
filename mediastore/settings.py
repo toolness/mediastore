@@ -41,7 +41,7 @@ PORT = int(os.environ['PORT'])
 set_default_db('sqlite:///%s' % path('db.sqlite3'))
 
 if 'ALLOWED_HOSTS' in os.environ:
-    ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS'].split(',')]
+    ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(',')
 
 # Application definition
 
