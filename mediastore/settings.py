@@ -109,6 +109,7 @@ if DEBUG:
     MEDIA_URL = '/debug/uploads/'
 
 AWS_QUERYSTRING_AUTH = False
+AWS_S3_FILE_OVERWRITE = False
 
 LOGGING = {
     'version': 1,
