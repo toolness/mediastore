@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'video',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -96,6 +97,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = path('staticfiles')
+
+if DEBUG:
+    MEDIA_ROOT = path('uploads')
+    MEDIA_URL = '/debug/uploads/'
 
 LOGGING = {
     'version': 1,

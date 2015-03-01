@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>{{ video.name }}</title>
+
+<h1>{{ video.name }}</h1>
+
+<p>
+  <video src="{{ video.source.url }}" controls></video>
+</p>
+
+{{ video.description }}
+
+<ul>
+  <li>
+    <a href="{{ video.source.url }}" download="{{ video.slug }}.mp4">Download</a>
+  </li>
+
+{% if user.is_superuser %}
+  <li>
+    <a href="{% url 'admin:video_video_change' video.id %}">Edit</a>
+  </li>
+{% endif %}
+</ul>

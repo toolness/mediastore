@@ -3,3 +3,4 @@ staticfiles
 venv
 .env
 *.sqlite3
+uploads
