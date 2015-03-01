@@ -45,3 +45,7 @@ Also, `DEBUG` is enabled.
 * `SECURE_PROXY_SSL_HEADER` is an optional HTTP request header field name
   and value indicating that the request is actually secure. For example,
   Heroku deployments should set this to `X-Forwarded-Proto: https`.
+* `STORAGE_BACKEND_URL` contains information about the backend
+  to use for storing uploads. Currently, the only available option is
+  Amazon S3, specified by a URL of the form
+  `s3://access-key:secret@bucket-name`.

@@ -14,7 +14,8 @@ import sys
 import dj_database_url
 
 from .settings_utils import set_default_env, set_default_db, \
-                            parse_secure_proxy_ssl_header
+                            parse_secure_proxy_ssl_header, \
+                            parse_storage_backend_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 path = lambda *parts: os.path.join(BASE_DIR, *parts)
@@ -28,6 +29,11 @@ if os.path.basename(sys.argv[0]) == 'manage.py' or 'DEBUG' in os.environ:
         # TODO: Support any alternative port passed-in from the command-line.
         PORT='8000',
     )
+
+if 'STORAGE_BACKEND_URL' in os.environ:
+    globals().update(parse_storage_backend_url(
+        os.environ['STORAGE_BACKEND_URL']
+    ))
 
 if 'SECURE_PROXY_SSL_HEADER' in os.environ:
     SECURE_PROXY_SSL_HEADER = parse_secure_proxy_ssl_header(

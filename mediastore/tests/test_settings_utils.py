@@ -3,7 +3,8 @@ from django.test import TestCase
 from mock import patch
 
 from ..settings_utils import set_default_env, set_default_db, \
-                             parse_secure_proxy_ssl_header
+                             parse_secure_proxy_ssl_header, \
+                             parse_storage_backend_url
 
 class SetDefaultEnvTests(TestCase):
     def test_sets_default_values(self):
@@ -40,3 +41,12 @@ class ParseSecureProxySslHeaderTests(TestCase):
             parse_secure_proxy_ssl_header('X-Forwarded-Proto: https'),
             ('HTTP_X_FORWARDED_PROTO', 'https')
         )
+
+class ParseStorageBackendUrlTests(TestCase):
+    def test_accepts_s3(self):
+        self.assertEqual(parse_storage_backend_url('s3://foo:bar@boop'), {
+            'DEFAULT_FILE_STORAGE': 'storages.backends.s3boto.S3BotoStorage',
+            'AWS_ACCESS_KEY_ID': 'foo',
+            'AWS_SECRET_ACCESS_KEY': 'bar',
+            'AWS_STORAGE_BUCKET_NAME': 'boop'
+        })
