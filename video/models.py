@@ -19,7 +19,8 @@ class Video(models.Model):
         unique=True
     )
     description = models.TextField(
-        help_text="Description of the video. Can contain HTML."
+        help_text="Description of the video. Can contain HTML.",
+        blank=True
     )
     source = models.FileField(
         help_text="Source file for the video. Must be video/mp4."
