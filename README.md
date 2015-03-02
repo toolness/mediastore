@@ -78,3 +78,7 @@ Also, `DEBUG` is enabled.
   to use for storing uploads. Currently, the only available option is
   Amazon S3, specified by a URL of the form
   `s3://access-key:secret@bucket-name`.
+
+<!-- Links -->
+
+  [twelve-factor]: http://12factor.net/
