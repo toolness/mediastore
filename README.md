@@ -1,4 +1,33 @@
-This is a simple server for hosting media files.
+This is a simple server for hosting media files, using S3 as
+a back-end.
+
+## Motivation
+
+YouTube and other movie distribution channels have a number
+of problems with them:
+
+* They might force users to watch ads before your video.
+* They don't make it easy for users to download the video
+  and watch it offline.
+* They don't make the raw HTML5 video URL of the uploaded
+  video easily visible for others to embed.
+* They might constrain the video to a specific aspect
+  ratio, truncate its last few seconds, or perform
+  any number of other transformations that the author may
+  dislike.
+* There's no easy way to visually embed them in sanitized HTML
+  environments that don't support iframes or the video
+  tag, such as GitHub issues or HTML emails.
+
+This server attempts to resolve these issues. Here's an example
+of a video embedded in this readme, hosted by the server:
+
+<a href="https://toolness-media.herokuapp.com/v/redis/play"><img src="https://toolness-media.herokuapp.com/v/redis.poster.play.jpg" alt="Play 'Redis' video"></a>
+
+The above is accomplished by creating a "fake" player widget that is
+simply the poster frame of the HTML5 video with a picture of a
+play button superimposed on it. This image is then linked to
+a video detail page on the server.
 
 ## Requirements
 
