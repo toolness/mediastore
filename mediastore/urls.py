@@ -8,6 +8,8 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^v/upload-poster-frame', 'video.views.upload_poster_frame',
+        name='video_upload_poster_frame'),
     url(r'^v/(?P<slug>[A-Za-z0-9_\-]+)$', 'video.views.detail',
         name='video_detail'),
 )

@@ -10,3 +10,6 @@ boto==2.36.0
 
 # For tests to run...
 mock==1.0.1
+
+# For image thumbnails and stuff...
+Pillow==2.7.0

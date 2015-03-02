@@ -59,7 +59,7 @@ body {
       <span class="hidden-teensy">Download</span>
     </a>
 
-    {% if user.is_superuser %}
+    {% if is_editable %}
     <a href="{% url 'admin:video_video_change' video.id %}"
        class="btn btn-default">
       <span class="glyphicon glyphicon-pencil"></span>
@@ -68,20 +68,28 @@ body {
     {% endif %}
   </div>
 </div>
+<form id="upload-poster-frame" method="post" action="{% url 'video_upload_poster_frame' %}">
+  {% csrf_token %}
+  <input type="hidden" name="id" value="{{ video.id }}">
+  <input type="hidden" name="dataURL" value="">
+</form>
 {% if DEBUG %}
 <script src="{% static 'vendor/jquery-2.1.3.js' %}"></script>
 {% else %}
 <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 {% endif %}
 <script src="{% static 'js/video-utils.js' %}"></script>
+{% if upload_poster_frame_on_load %}
 <script>
-var video = $('video.main-video');
-
 $(function() {
+  var video = $('video.main-video');
+
   VideoUtils.waitForFrame(video, function() {
     var dataURL = VideoUtils.makePosterFrameWithPlayButton(video);
-    console.log("Data URL length:", dataURL.length);
-    //$('<img src="' + dataURL + '">').appendTo('body');
+    var form = $('#upload-poster-frame');
+    $('[name="dataURL"]').attr('value', dataURL);
+    form.submit();
   });
 });
 </script>
+{% endif %}
