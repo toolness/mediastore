@@ -43,7 +43,9 @@ body {
   <h1>{{ video.name }}</h1>
 
   <div class="main-video-holder">
-    <video class="main-video" src="{{ video.source.url }}" controls></video>
+    <video class="main-video" controls>
+      <source src="{{ video.source.url }}" type="video/mp4"></source>
+    </video>
   </div>
 
   <div class="main-video-description">
