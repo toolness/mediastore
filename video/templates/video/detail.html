@@ -40,6 +40,10 @@ body {
   margin-top: 1em;
 }
 
+div[contentEditable="true"] img {
+  width: 100%;
+}
+
 @media (max-width: 480px) {
   .hidden-teensy {
     display: none;
@@ -103,6 +107,7 @@ body {
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#html5" aria-controls="html5" role="tab" data-toggle="tab">HTML 5</a></li>
             <li role="presentation"><a href="#html4" aria-controls="html4" role="tab" data-toggle="tab">HTML 4</a></li>
+            <li role="presentation"><a href="#rtf" aria-controls="rtf" role="tab" data-toggle="tab">Rich Text</a></li>
           </ul>
 
           <!-- Tab panes -->
@@ -121,6 +126,10 @@ body {
                 code above embeds a linked image of the video that 
                 brings the user to this website.
               </p>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="rtf">
+              <p>Copy and paste the content below into any rich text field (such as a Gmail message).</p>
+              <div contentEditable="true">{{ embed_html4|safe }}</div>
             </div>
           </div>
         </div>
