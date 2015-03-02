@@ -32,6 +32,10 @@ body {
   margin: 1em 0;
 }
 
+.embed-code {
+  font-family: monospace;
+}
+
 @media (max-width: 480px) {
   .hidden-teensy {
     display: none;
@@ -59,6 +63,13 @@ body {
       <span class="hidden-teensy">Download</span>
     </a>
 
+    <a href="#"
+       class="btn btn-default"
+       data-toggle="modal" data-target="#embed-modal">
+      <span style="font-weight: bold; font-family: monospace">&lt;/&gt;</span>
+      <span class="hidden-teensy">Embed</span>
+    </a>
+
     {% if is_editable %}
     <a href="{% url 'admin:video_video_change' video.id %}"
        class="btn btn-default">
@@ -68,6 +79,27 @@ body {
     {% endif %}
   </div>
 </div>
+<div class="modal fade" id="embed-modal"
+     tabindex="-1" role="dialog"
+     aria-labelledby="embed-modal-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close"
+         data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="embed-modal-label">
+          Embed This Video
+        </h4>
+      </div>
+      <div class="modal-body">
+        <p>Here is HTML for embedding the video.</p>
+        <textarea autocomplete="off" class="form-control embed-code">{{ embed_html }}</textarea>
+      </div>
+    </div>
+  </div>
+</div>
 <form id="upload-poster-frame" method="post" action="{% url 'video_upload_poster_frame' %}">
   {% csrf_token %}
   <input type="hidden" name="id" value="{{ video.id }}">
@@ -75,8 +107,10 @@ body {
 </form>
 {% if DEBUG %}
 <script src="{% static 'vendor/jquery-2.1.3.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.js' %}"></script>
 {% else %}
 <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 {% endif %}
 <script src="{% static 'js/video-utils.js' %}"></script>
 {% if upload_poster_frame_on_load %}

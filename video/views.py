@@ -16,6 +16,7 @@ def detail(request, slug):
     return render(request, 'video/detail.html', {
         'DEBUG': settings.DEBUG,
         'video': video,
+        'embed_html': video.get_embed_html(request),
         'is_editable': request.user.is_superuser,
         'upload_poster_frame_on_load': (
             request.user.is_superuser and
