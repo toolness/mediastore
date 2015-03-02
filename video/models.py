@@ -31,3 +31,11 @@ class Video(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if self.id is not None:
+            # http://stackoverflow.com/a/8342249
+            old_self = Video.objects.get(id=self.id)
+            if old_self.source != self.source:
+                old_self.source.delete(save=False)
+        super(Video, self).save(*args, **kwargs)
