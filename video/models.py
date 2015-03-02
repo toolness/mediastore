@@ -35,12 +35,23 @@ class Video(models.Model):
     def get_absolute_url(self):
         return reverse('video_detail', args=(self.slug,))
 
-    def get_embed_html(self, request):
+    def get_embed_html5(self, request):
         return '<video controls src="%s"></video>' % (
             request.build_absolute_uri(
                 reverse('video_source', args=(self.slug,))
             )
         )
+
+    def get_embed_html4(self, request):
+        href = request.build_absolute_uri(
+            reverse('video_detail', args=(self.slug,))
+        )
+        src = request.build_absolute_uri(
+            reverse('video_poster_frame_with_play_button',
+                    args=(self.slug,))
+        )
+
+        return '<a href="%s"><img src="%s"></a>' % (href, src)
 
     def __unicode__(self):
         return self.name

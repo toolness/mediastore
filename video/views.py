@@ -1,4 +1,5 @@
 import os
+import mimetypes
 from base64 import b64decode
 from django.shortcuts import render, get_object_or_404
 from django.conf import settings
@@ -16,7 +17,8 @@ def detail(request, slug):
     return render(request, 'video/detail.html', {
         'DEBUG': settings.DEBUG,
         'video': video,
-        'embed_html': video.get_embed_html(request),
+        'embed_html5': video.get_embed_html5(request),
+        'embed_html4': video.get_embed_html4(request),
         'is_editable': request.user.is_superuser,
         'upload_poster_frame_on_load': (
             request.user.is_superuser and
@@ -27,6 +29,14 @@ def detail(request, slug):
 def source(request, slug):
     video = get_object_or_404(Video, slug=slug)
     return HttpResponseRedirect(video.source.url)
+
+def poster_frame_with_play_button(request, slug):
+    video = get_object_or_404(Video, slug=slug)
+    if not video.poster_frame_with_play_button:
+        return HttpResponseNotFound()
+    return HttpResponseRedirect(
+        video.poster_frame_with_play_button.url
+    )
 
 @login_required
 @require_POST
@@ -45,9 +55,10 @@ def upload_poster_frame(request):
 def debug_get_media(request, path):
     if settings.DEBUG:
         abspath = os.path.join(settings.MEDIA_ROOT, path)
-        if os.path.exists(abspath):
+        ctype, encoding = mimetypes.guess_type(abspath)
+        if os.path.exists(abspath) and ctype:
             return HttpResponse(
                 open(abspath, 'rb').read(),
-                content_type='video/mp4'
+                content_type=ctype
             )
     return HttpResponseNotFound()

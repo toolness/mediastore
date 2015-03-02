@@ -36,6 +36,10 @@ body {
   font-family: monospace;
 }
 
+.tab-pane {
+  margin-top: 1em;
+}
+
 @media (max-width: 480px) {
   .hidden-teensy {
     display: none;
@@ -94,8 +98,32 @@ body {
         </h4>
       </div>
       <div class="modal-body">
-        <p>Here is HTML for embedding the video.</p>
-        <textarea autocomplete="off" class="form-control embed-code">{{ embed_html }}</textarea>
+        <div role="tabpanel">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#html5" aria-controls="html5" role="tab" data-toggle="tab">HTML 5</a></li>
+            <li role="presentation"><a href="#html4" aria-controls="html4" role="tab" data-toggle="tab">HTML 4</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="html5">
+              <p>Here is HTML 5 code for embedding the video.</p>
+              <textarea autocomplete="off" class="form-control embed-code">{{ embed_html5 }}</textarea>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="html4">
+              <p>Here is HTML 4 code for embedding the video.</p>
+              <textarea autocomplete="off" class="form-control embed-code">{{ embed_html4 }}</textarea>
+              <br>
+              <p>
+                <strong>Note:</strong> Because HTML 4 doesn't 
+                support the <code>&lt;video&gt;</code> element, the 
+                code above embeds a linked image of the video that 
+                brings the user to this website.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

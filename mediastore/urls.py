@@ -14,6 +14,9 @@ urlpatterns = patterns('',
         name='video_detail'),
     url(r'^v/(?P<slug>[A-Za-z0-9_\-]+).mp4$', 'video.views.source',
         name='video_source'),
+    url(r'^v/(?P<slug>[A-Za-z0-9_\-]+).poster.play.jpg$',
+        'video.views.poster_frame_with_play_button',
+        name='video_poster_frame_with_play_button'),
 )
 
 if settings.DEBUG:
