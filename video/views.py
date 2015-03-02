@@ -23,6 +23,10 @@ def detail(request, slug):
         )
     })
 
+def source(request, slug):
+    video = get_object_or_404(Video, slug=slug)
+    return HttpResponseRedirect(video.source.url)
+
 @login_required
 @require_POST
 def upload_poster_frame(request):

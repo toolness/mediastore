@@ -12,6 +12,8 @@ urlpatterns = patterns('',
         name='video_upload_poster_frame'),
     url(r'^v/(?P<slug>[A-Za-z0-9_\-]+)$', 'video.views.detail',
         name='video_detail'),
+    url(r'^v/(?P<slug>[A-Za-z0-9_\-]+).mp4$', 'video.views.source',
+        name='video_source'),
 )
 
 if settings.DEBUG:
