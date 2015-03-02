@@ -55,7 +55,9 @@ div[contentEditable="true"] img {
   <h1>{{ video.name }}</h1>
 
   <div class="main-video-holder">
-    <video class="main-video" controls crossorigin="anonymous">
+    <video class="main-video"
+           controls crossorigin="anonymous"
+           {% if autoplay %}autoplay{% endif %}>
       <source src="{{ video.source.url }}" type="video/mp4"></source>
     </video>
   </div>

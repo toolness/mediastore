@@ -44,7 +44,7 @@ class Video(models.Model):
 
     def get_embed_html4(self, request):
         href = request.build_absolute_uri(
-            reverse('video_detail', args=(self.slug,))
+            reverse('video_play', args=(self.slug,))
         )
         src = request.build_absolute_uri(
             reverse('video_poster_frame_with_play_button',
