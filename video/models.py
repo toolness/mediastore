@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.utils.html import escape
 
 class Video(models.Model):
     '''
@@ -50,8 +51,9 @@ class Video(models.Model):
             reverse('video_poster_frame_with_play_button',
                     args=(self.slug,))
         )
+        alt = "Play '%s' video" % escape(self.name)
 
-        return '<a href="%s"><img src="%s"></a>' % (href, src)
+        return '<a href="%s"><img src="%s" alt="%s"></a>' % (href, src, alt)
 
     def __unicode__(self):
         return self.name
