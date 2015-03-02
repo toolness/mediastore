@@ -43,7 +43,7 @@ body {
   <h1>{{ video.name }}</h1>
 
   <div class="main-video-holder">
-    <video class="main-video" controls>
+    <video class="main-video" controls crossorigin="anonymous">
       <source src="{{ video.source.url }}" type="video/mp4"></source>
     </video>
   </div>
@@ -68,3 +68,20 @@ body {
     {% endif %}
   </div>
 </div>
+{% if DEBUG %}
+<script src="{% static 'vendor/jquery-2.1.3.js' %}"></script>
+{% else %}
+<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+{% endif %}
+<script src="{% static 'js/video-utils.js' %}"></script>
+<script>
+var video = $('video.main-video');
+
+$(function() {
+  VideoUtils.waitForFrame(video, function() {
+    var dataURL = VideoUtils.makePosterFrameWithPlayButton(video);
+    console.log("Data URL length:", dataURL.length);
+    //$('<img src="' + dataURL + '">').appendTo('body');
+  });
+});
+</script>
