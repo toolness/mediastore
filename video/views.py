@@ -12,12 +12,13 @@ from django.core.files.base import ContentFile
 
 from .models import Video
 
-def detail(request, slug, autoplay=False):
+def detail(request, slug, autoplay=False, loop=False):
     video = get_object_or_404(Video, slug=slug)
     return render(request, 'video/detail.html', {
         'DEBUG': settings.DEBUG,
         'video': video,
         'autoplay': autoplay,
+        'loop': loop,
         'embed_html5': video.get_embed_html5(request),
         'embed_html4': video.get_embed_html4(request),
         'is_editable': request.user.is_superuser,
