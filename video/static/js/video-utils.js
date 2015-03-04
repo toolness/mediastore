@@ -10,10 +10,14 @@ var VideoUtils = {
     ctx = canvas.getContext('2d');
 
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.scale(0.5, 0.5);
 
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.66)';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
     ctx.beginPath();
     ctx.arc(0, 0, 64, 0, Math.PI * 2, false);
     ctx.fill();
