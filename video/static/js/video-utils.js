@@ -1,6 +1,6 @@
 var VideoUtils = {
   makePosterFrameWithPlayButton: function(video) {
-    var canvas, ctx;
+    var canvas, ctx, scaling;
 
     video = $(video)[0];
 
@@ -15,7 +15,12 @@ var VideoUtils = {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.scale(0.5, 0.5);
+
+    // We want the play button to be 64x64px on an 800x600 video.
+    // Scale it proportionally based on the actual size of our
+    // video.
+    scaling = canvas.width / 800;
+    ctx.scale(scaling, scaling);
 
     ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
     ctx.beginPath();
