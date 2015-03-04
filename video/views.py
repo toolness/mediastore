@@ -19,6 +19,7 @@ def detail(request, slug, autoplay=False, loop=False):
         'video': video,
         'autoplay': autoplay,
         'loop': loop,
+        'debug': 'debug' in request.GET,
         'embed_html5': video.get_embed_html5(request),
         'embed_html4': video.get_embed_html4(request),
         'is_editable': request.user.is_superuser,

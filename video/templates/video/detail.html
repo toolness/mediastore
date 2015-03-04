@@ -166,3 +166,17 @@ $(function() {
 });
 </script>
 {% endif %}
+{% if debug %}
+<script>
+$(function() {
+  var video = $('video.main-video');
+
+  VideoUtils.waitForFrame(video, function() {
+    var dataURL = VideoUtils.makePosterFrameWithPlayButton(video);
+    $('<img>').attr('src', dataURL).appendTo('.main-video-holder').css({
+      maxWidth: '100%'
+    });
+  });
+});
+</script>
+{% endif %}
