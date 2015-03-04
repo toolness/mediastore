@@ -39,6 +39,8 @@ if 'SECURE_PROXY_SSL_HEADER' in os.environ:
     SECURE_PROXY_SSL_HEADER = parse_secure_proxy_ssl_header(
         os.environ['SECURE_PROXY_SSL_HEADER']
     )
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = TEMPLATE_DEBUG = 'DEBUG' in os.environ
@@ -62,6 +64,8 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'mediastore.ssl.RedirectToHttpsMiddleware',
+    'mediastore.ssl.HstsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
